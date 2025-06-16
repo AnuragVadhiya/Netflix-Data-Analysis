@@ -133,7 +133,7 @@ WHERE TO_DATE(date_added, 'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '5 years'
 ```
 - **Objective**: List content added to Netflix since June 2020 (based on June 16, 2025).
 
-#### Q.7: Find All Movies/TV Shows by Director 'Rajiv Chilaka'
+#### Q.7: Find All Movies/TV Shows by specific Director 
 ```sql
 SELECT *
 FROM (
@@ -142,49 +142,20 @@ FROM (
         UNNEST(STRING_TO_ARRAY(director, ',')) AS director_name
     FROM netflix
 ) AS t
-WHERE director_name = 'Rajiv Chilaka';
+WHERE director_name = 'Suhas Kadav';
 ```
-- **Objective**: Retrieve all content directed by Rajiv Chilaka.
+- **Objective**: Retrieve all content directed by a specified director.
 
-#### Q.8: List All TV Shows with More Than 5 Seasons
+#### Q.8: List All TV Shows with More Than 3 Seasons
 ```sql
 SELECT *
 FROM netflix
 WHERE type = 'TV Show'
-  AND SPLIT_PART(duration, ' ', 1)::INT > 5;
+  AND SPLIT_PART(duration, ' ', 1)::INT > 3;
 ```
-- **Objective**: Identify TV shows with over five seasons.
+- **Objective**: Identify TV shows with over 3 seasons(or any number of seasons).
 
-#### Q.9: Count the Number of Content Items in Each Genre
-```sql
-SELECT 
-    UNNEST(STRING_TO_ARRAY(listed_in, ',')) AS genre,
-    COUNT(*) AS total_content
-FROM netflix
-GROUP BY 1;
-```
-- **Objective**: Quantify content by genre.
-
-
-#### Q.10: Top 5 Years for Content Releases in India
-```sql
-SELECT 
-    country,
-    release_year,
-    COUNT(show_id) AS total_release,
-    ROUND(
-        COUNT(show_id)::numeric /
-        (SELECT COUNT(show_id) FROM netflix WHERE country = 'India')::numeric * 100, 2
-    ) AS avg_release
-FROM netflix
-WHERE country = 'India'
-GROUP BY country, release_year
-ORDER BY avg_release DESC
-LIMIT 5;
-```
-- **Objective**: Rank years by the percentage of India’s total content releases.
-
-#### Q.11: List All Movies that are Documentaries
+#### Q.9: List All Movies that are Documentaries
 ```sql
 SELECT * 
 FROM netflix
@@ -192,7 +163,8 @@ WHERE listed_in LIKE '%Documentaries';
 ```
 - **Objective**: Retrieve all documentary movies.
 
-#### Q.12: Find All Content Without a Director
+
+#### Q.10: Find All Content Without a Director
 ```sql
 SELECT * 
 FROM netflix
@@ -200,29 +172,15 @@ WHERE director IS NULL;
 ```
 - **Objective**: List content lacking a director.
 
-#### Q.13: Find Movies Featuring 'Salman Khan' in the Last 10 Years
+#### Q.11: Find Movies Featuring '---------'
 ```sql
 SELECT * 
 FROM netflix
-WHERE casts LIKE '%Salman Khan%'
-  AND release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10;
+WHERE casts LIKE '%Aamir Khan%';
 ```
-- **Objective**: List recent movies (since 2015) with Salman Khan in the cast.
+- **Objective**: Retrieve all movies casting specified actor.
 
-#### Q.14: Top 10 Actors in Indian Movies
-```sql
-SELECT 
-    UNNEST(STRING_TO_ARRAY(casts, ',')) AS actor,
-    COUNT(*)
-FROM netflix
-WHERE country = 'India'
-GROUP BY actor
-ORDER BY COUNT(*) DESC
-LIMIT 10;
-```
-- **Objective**: Identify the top 10 actors by appearances in Indian movies.
-
-#### Q.15: Categorize Content Based on 'Kill' and 'Violence' Keywords
+#### Q.12: Categorize Content Based on 'Kill' and 'Violence' Keywords
 ```sql
 SELECT 
     category,
@@ -230,14 +188,15 @@ SELECT
 FROM (
     SELECT 
         CASE 
-            WHEN description ILIKE '%kill%' OR description ILIKE '%violence%' THEN 'Bad'
-            ELSE 'Good'
+            WHEN description ILIKE '%kill%' OR description ILIKE '%violence%' THEN 'A/R rated'
+            ELSE 'U/A Rated'
         END AS category
     FROM netflix
 ) AS categorized_content
 GROUP BY category;
+
 ```
-- **Objective**: Classify content as 'Bad' (contains 'kill' or 'violence') or 'Good' and count each category.
+- **Objective**: Classify content as 'A/R rated' (contains 'kill' or 'violence') or 'U/A rated' and count each category.
 
 
 This analysis equips Netflix with data-driven insights to optimize its content strategy, enhance viewer engagement, and strengthen its global presence.
