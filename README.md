@@ -6,7 +6,7 @@
 
 This project, **Netflix Content Analysis**, utilizes SQL to perform a detailed exploration of Netflix's movies and TV shows dataset. The primary aim is to derive actionable insights that address key business questions related to content strategy, audience targeting, and platform performance. By analyzing attributes such as content type, ratings, release years, genres, and geographic origins, this project uncovers trends and patterns that can inform Netflix’s content acquisition, production, and marketing decisions.
 
-The dataset, stored in a PostgreSQL table named `netflix`, includes comprehensive details about each title, such as show ID, type, title, director, cast, country, release year, rating, duration, genres, and description. The accompanying SQL script (`netflix_analysis.sql`) provides a robust set of queries for data exploration and analysis, designed to be both insightful and adaptable to similar datasets.
+The dataset, stored in a PostgreSQL table named `netflix`, includes comprehensive details about each title, such as show ID, type, title, director, cast, country, release year, rating, duration, genres, and description. The accompanying SQL script (`netflix_titles.sql`) provides a robust set of queries for data exploration and analysis, designed to be both insightful and adaptable to similar datasets.
 
 This repository showcases practical SQL techniques for extracting meaningful business insights from complex datasets.
 
