@@ -1,4 +1,3 @@
-# Netflix-Data-Analysis
 
 # Netflix Content Analysis with SQL
 
