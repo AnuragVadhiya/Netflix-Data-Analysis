@@ -242,10 +242,6 @@ GROUP BY category;
 
 This analysis equips Netflix with data-driven insights to optimize its content strategy, enhance viewer engagement, and strengthen its global presence.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ## Author
 
 **Anurag Vadhiya**
