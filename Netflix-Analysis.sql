@@ -8,7 +8,7 @@ CREATE TABLE netflix
     show_id      VARCHAR(5),
     type         VARCHAR(10),
     title        VARCHAR(250),
-    director     VARCHAR(550),
+    director     VARCHAR(600),
     casts        VARCHAR(1050),
     country      VARCHAR(550),
     date_added   VARCHAR(55),
